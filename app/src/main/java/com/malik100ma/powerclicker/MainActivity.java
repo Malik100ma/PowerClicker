@@ -48,30 +48,73 @@ public class MainActivity extends AppCompatActivity {
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
         progressBar1 = findViewById(R.id.progressBar);
+
+
+
+        imageView1.setTranslationX(-300);
+        imageView2.setTranslationX(300);
+
+        imageView1.setImageResource(R.drawable.sub3);
+        imageView2.setImageResource(R.drawable.sub3);
+
         imageView1.setOnClickListener(v -> {
+            if (!gameStarted) {
+                return;
+            }
+            imageLoader(20, 50);
             player1Score++;
             progressStatus = progressStatus + 10;
             progressBar1.setProgress(progressStatus);
             tvScore1.setText("" + player1Score);
+            imageView1.setScaleX(1.25f);
+            imageView1.setScaleY(1.25f);
+            new Handler().postDelayed(() -> {
+                imageView1.setScaleX(1f);
+                imageView1.setScaleY(1f);
+            }, 100);
         });
         imageView2.setOnClickListener(v -> {
+            if (!gameStarted) {
+                return;
+            }
+            imageLoader(20, 50);
             player2Score++;
             progressStatus = progressStatus - 10;
             progressBar1.setProgress(progressStatus);
             tvScore2.setText("" + player2Score);
+            imageView2.setScaleX(1.25f);
+            imageView2.setScaleY(1.25f);
+            new Handler().postDelayed(() -> {
+                imageView2.setScaleX(1f);
+                imageView2.setScaleY(1f);
+            }, 100);
         });
         btnStart.setOnClickListener(v -> {
+            imageView1.animate().translationX(340).setDuration(3000);
+            imageView2.animate().translationX(-340).setDuration(3000);
             tvInfo.setText("3");
             new Handler().postDelayed(() -> {
                 tvInfo.setText("2");
-            },1000);
+            }, 1000);
             new Handler().postDelayed(() -> {
                 tvInfo.setText("1");
-            },2000);
+            }, 2000);
             new Handler().postDelayed(() -> {
                 tvInfo.setText("Start!");
                 gameStarted = true;
-            },3000);
+            }, 3000);
         });
+    }
+
+    public void imageLoader(int scoreForChad, int scoreForTrueAdam) {
+        if (player1Score >= scoreForChad) {
+            imageView1.setImageResource(R.drawable.chad);
+        } else if (player2Score >= scoreForChad) {
+            imageView2.setImageResource(R.drawable.chad);
+        } else if (player1Score >= scoreForTrueAdam) {
+            imageView1.setImageResource(R.drawable.trueadam);
+        } else if (player2Score >= scoreForTrueAdam) {
+            imageView2.setImageResource(R.drawable.trueadam);
+        }
     }
 }
