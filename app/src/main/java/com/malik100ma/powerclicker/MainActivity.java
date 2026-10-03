@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        imageView1.setTranslationX(-300);
-        imageView2.setTranslationX(300);
+        imageView1.setTranslationX(-100);
+        imageView2.setTranslationX(100);
 
         imageView1.setImageResource(R.drawable.sub3);
         imageView2.setImageResource(R.drawable.sub3);
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
             }, 100);
         });
         btnStart.setOnClickListener(v -> {
-            imageView1.animate().translationX(340).setDuration(3000);
-            imageView2.animate().translationX(-340).setDuration(3000);
+            imageView1.animate().translationX(600).setDuration(3000);
+            imageView2.animate().translationX(-600).setDuration(3000);
             tvInfo.setText("3");
             new Handler().postDelayed(() -> {
                 tvInfo.setText("2");
@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void imageLoader(int scoreForChad, int scoreForTrueAdam) {
-        if (player1Score >= scoreForChad) {
+        if (player1Score == scoreForChad) {
             imageView1.setImageResource(R.drawable.chad);
-        } else if (player2Score >= scoreForChad) {
+        } else if (player2Score == scoreForChad) {
             imageView2.setImageResource(R.drawable.chad);
         } else if (player1Score >= scoreForTrueAdam) {
             imageView1.setImageResource(R.drawable.trueadam);
